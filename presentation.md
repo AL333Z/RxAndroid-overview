@@ -1,5 +1,5 @@
 #RxJava and RxAndroid
-##Zoffoli Alessandro
+
 ---
 
 #Reactive Programming
@@ -106,7 +106,7 @@ query("Hello, world!")                    // -> Observable<List<String>>
   .flatMap(url -> getTitle(url))          // -> Observable<String>
   .filter(title -> title != null)
   .doOnNext(title -> saveTitle(title))    // extra behavior
-  .map(title -> new Pair<Integer, String>(0, title)) // -> Observable<Pari<Integer, String>>
+  .map(title -> new Pair<Integer, String>(0, title)) // -> Observable<Pair<Integer, String>>
   .scan((sum, item) -> new Pair<Integer, Word>(sum.first + 1, item.second))
   .take(5)
   .subscribe(indexItemPair ->
@@ -423,10 +423,10 @@ public void onResume() {
 
     // bind this fragment to word list observable
     wordListObservable = AndroidObservable.bindFragment(this,
-      apiManager.getApi().getWords(month , year, getContentCodLocale, token, userId)
+      apiManager.getApi().getWords(month, year, getContentCodLocale, token, userId)
           .subscribeOn(Schedulers.io()) // network stuff in io scheduler
           .flatMap(wordsResponse -> Observable.from(wordsResponse.getWords())) // Observable<WordResponse> -> Observable<Word>
-          .toSortedList((l, r) -> { ... sort elements... })
+          .toSortedList((l, r) -> { ... sort elements... }) // Observable<Word> -> Observable<List<Word>>
           .flatMap(list -> Observable.from(list)) // Observable<List<Word>> -> Observable<Word>
 
           // build an Observable<Pair<Integer, Word>> (the integer value is the index)
