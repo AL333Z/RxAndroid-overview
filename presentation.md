@@ -499,6 +499,20 @@ AndroidObservable.fromBroadcast(context, intentFilter)
 
 ---
 
+#Old slow code
+
+Using `defer()`, the Observable returned won't call slowBlockingMethod() until you subscribe to it
+
+```java
+private Object slowBlockingMethod() { ... }
+
+public Observable<Object> newMethod() {
+    return Observable.defer(() -> Observable.just(slowBlockingMethod()));
+}
+```
+
+---
+
 #Credits
 
 Most of the images are from RxJava's docs. Some code example from `Grokking RxJava` posts by Dan Lew.
