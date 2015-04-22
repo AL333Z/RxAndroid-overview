@@ -5,7 +5,7 @@
 #Reactive Programming
 ##a.k.a. asynchronous data streams programming
 - **stream of asynchronous events**, that can be observed
-- streams can be used as an inputs to other streams (*functional* part)
+- streams can be used as an inputs to other streams
 - wide range of **operators** on streams, graphically represented with [marble diagrams](http://rxmarbles.com).
 
 ---
